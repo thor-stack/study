@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 public class Config {
 
-    private String servicePackage;
+    private String scanPkg;
 
     private String zookeeperUrl;
 

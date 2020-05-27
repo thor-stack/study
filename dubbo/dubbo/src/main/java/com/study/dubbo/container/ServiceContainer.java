@@ -1,5 +1,7 @@
 package com.study.dubbo.container;
 
+import io.netty.util.internal.StringUtil;
+
 import java.util.*;
 
 /**
@@ -19,11 +21,33 @@ public class ServiceContainer {
         serviceByClassName = new HashMap<>();
     }
 
-    public List<Object> getServicesByInterfaceName(String interfaceName) {
+    public Object math(String interfaceName, String prefix) {
+        List<Object> services = getServicesByInterfaceName(interfaceName);
+        if (services == null) {
+            return null;
+        }
+        if (services.size() == 1 && StringUtil.isNullOrEmpty(prefix)) {
+            return services.get(0);
+        }
+        String[] split = interfaceName.split("\\.");
+        String lastName = split[split.length - 1];
+        if (!StringUtil.isNullOrEmpty(prefix)) {
+            lastName = prefix.concat(lastName);
+        }
+        String className = "";
+        for (int i = 0; i < split.length - 1; i++) {
+            className += split[i] + ".";
+        }
+        className += lastName;
+        return getServiceByClassName(className);
+//        return services.get(0);
+    }
+
+    private List<Object> getServicesByInterfaceName(String interfaceName) {
         return servicesByInterfaceName.get(interfaceName);
     }
 
-    public Object getServiceByClassName(String className) {
+    private Object getServiceByClassName(String className) {
         return serviceByClassName.get(className);
     }
 
@@ -40,7 +64,7 @@ public class ServiceContainer {
         serviceByClassName.put(service.getClass().getName(), service);
     }
 
-    public Set<String> getAllInterfaceName(){
+    public Set<String> getAllInterfaceName() {
         return servicesByInterfaceName.keySet();
     }
 }

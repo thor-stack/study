@@ -13,7 +13,7 @@ import java.util.Random;
 public class RandomLoadBalancer implements LoadBalancer {
 
     @Override
-    public SocketAddress peek(List<SocketAddress> socketAddresses) {
+    public SocketAddress next(List<SocketAddress> socketAddresses) {
         if (socketAddresses == null || socketAddresses.size() == 0) {
             return null;
         }

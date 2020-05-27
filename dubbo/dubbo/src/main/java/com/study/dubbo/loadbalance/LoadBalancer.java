@@ -5,5 +5,5 @@ import java.util.List;
 
 public interface LoadBalancer {
 
-    SocketAddress peek(List<SocketAddress> socketAddresses);
+    SocketAddress next(List<SocketAddress> socketAddresses);
 }
