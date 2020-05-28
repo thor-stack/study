@@ -64,7 +64,7 @@ public class DubboWorker {
     private void initCuratorFramework(String zookeeperUrl) {
         curatorFramework = CuratorFrameworkFactory.builder()
                 .connectString(config.getZookeeperUrl())
-                .connectionTimeoutMs(1000)
+                .connectionTimeoutMs(10000)
                 .retryPolicy(new ExponentialBackoffRetry(1000, 3))
                 .build();
         curatorFramework.start();
@@ -96,7 +96,6 @@ public class DubboWorker {
                 ServerBootstrap bootstrap = new ServerBootstrap();
                 bootstrap.group(parentGroup, childGroup)
                         .channel(NioServerSocketChannel.class)
-                        .option(ChannelOption.TCP_NODELAY, true)
                         .childHandler(new ChannelInitializer<SocketChannel>() {
                             @Override
                             protected void initChannel(SocketChannel ch) throws Exception {

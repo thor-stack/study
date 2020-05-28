@@ -21,12 +21,12 @@ public class FirstMain {
         config.setIp("localhost");
         config.setPort(8888);
         config.setScanPkg("com.study");
-        config.setZookeeperUrl("10.0.0.101:2181");
+        config.setZookeeperUrl("47.52.159.139:2181");
         DubboWorker worker = new DubboWorker(config);
         worker.start();
         worker.fillStaticReference(FirstMain.class);
         for (int i= 0; i < 10; i++){
-            System.out.println(firstService.first("Hello Dubbo" + i));
+            System.out.println(firstService.first("Hello Dubbo-" + i));
             TimeUnit.MILLISECONDS.sleep(1000);
         }
         Integer response2 = secondService.second(222222);

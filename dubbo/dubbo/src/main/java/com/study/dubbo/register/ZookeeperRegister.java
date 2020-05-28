@@ -1,6 +1,5 @@
 package com.study.dubbo.register;
 
-import com.study.dubbo.annotation.Reference;
 import com.study.dubbo.annotation.Service;
 import com.study.dubbo.config.Config;
 import com.study.dubbo.constent.CommonConstant;
@@ -15,7 +14,6 @@ import org.reflections.scanners.TypeAnnotationsScanner;
 import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
 
-import java.lang.reflect.Field;
 import java.net.URISyntaxException;
 import java.util.Set;
 
@@ -48,7 +46,7 @@ public class ZookeeperRegister implements Register {
         // 检查配置
         checkConfig(config);
         // 扫描服务
-        initDobbo(config.getScanPkg());
+        initDubbo(config.getScanPkg());
         // 注册服务
         doRegister(config);
     }
@@ -82,7 +80,7 @@ public class ZookeeperRegister implements Register {
         }
     }
 
-    private void initDobbo(String basePackage) throws URISyntaxException, ClassNotFoundException,
+    private void initDubbo(String basePackage) throws URISyntaxException, ClassNotFoundException,
             IllegalAccessException, InstantiationException {
         ConfigurationBuilder config = new ConfigurationBuilder();
         config.addUrls(ClasspathHelper.forPackage(basePackage));

@@ -19,11 +19,11 @@ public class SecondMain {
         config.setIp("localhost");
         config.setPort(9999);
         config.setScanPkg("com.study");
-        config.setZookeeperUrl("10.0.0.101:2181");
+        config.setZookeeperUrl("47.52.159.139:2181");
         DubboWorker worker = new DubboWorker(config);
         worker.start();
         worker.fillStaticReference(SecondMain.class);
-        String response = firstService.first("Hello Dubbo");
+        String response = firstService.first("XXXXXXXXXXXXXXXXX");
         System.out.println(response);
         Integer response2 = secondService.second(222222);
         System.out.println(response2);
